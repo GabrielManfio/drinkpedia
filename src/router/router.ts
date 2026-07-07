@@ -1,9 +1,10 @@
 import { Router } from "express";
+import { drinks } from "../model/drink-data";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-    res.send("Drinkpedia API");
+router.get("/drinks", (req, res) => {
+    res.send(drinks);
 });
 
 export default router;
