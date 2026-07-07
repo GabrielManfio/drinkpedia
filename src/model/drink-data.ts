@@ -1,6 +1,6 @@
 import DrinkModel from "./drink-model";
 
-const drinks: DrinkModel[] = [
+export const drinks: DrinkModel[] = [
   {
     name: "Caipirinha",
     preparation:
