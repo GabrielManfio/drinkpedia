@@ -1,19 +1,34 @@
 import { Request, Response } from "express";
-import * as drinkRepository from "../repository/drink-repository";
+import { createDrinkService, deleteDrinkService, getDrinkService } from "../services/drink-services";
+import HttpResponse from "../model/http-response";
+import { noContent } from "../utils/http-helper";
+import DeleteDrinkParams from "../model/delete-drink";
 
-export function getDrinks(req: Request, res: Response) {
-    const drinks = drinkRepository.findAll();
+export const getDrink = async (req: Request, res: Response) =>{
+    const httpResponse = await getDrinkService(req.query) as HttpResponse
+    
+    res.status(httpResponse.statusCode).json(httpResponse.body)
+};
 
-    res.json(drinks);
+export const postDrink = async (req: Request, res: Response) =>{
+ const bodyValue = req.body;
+ const httpResponse = await createDrinkService(bodyValue) as HttpResponse
+ 
+ if (httpResponse){
+    res.status(httpResponse.statusCode).json(httpResponse.body)
+ } else {
+    const response = await noContent() as HttpResponse
+ }
 }
 
-export function getDrink(req: Request, res: Response) {
 
+export const deleteDrink = async (
+    req: Request<DeleteDrinkParams>,
+    res: Response
+) => {
     const { name } = req.params;
 
-    const drink = drinkRepository.findByName(Array.isArray(name) ? name[0] : name);
+    const httpResponse = await deleteDrinkService(name);
 
-
-
-    res.json(drink);
-}
+    res.status(httpResponse.statusCode).json(httpResponse.body);
+};

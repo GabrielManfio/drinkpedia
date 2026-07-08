@@ -4,10 +4,9 @@ import DrinkModel from "../model/drink-model";
 
 const database = drinks
 
-export const findAllDrinks = async(): Promise<DrinkModel[]> => {
-  return database;
-}
-
+export const findByName = async (name: string): Promise<DrinkModel | undefined> => {
+  return database.find((drink) => drink.name === name);
+};
 export const insertDrink = async(drink: DrinkModel): Promise<DrinkModel[]> => {
     database.push(drink);
     return database;
@@ -22,7 +21,7 @@ export const deleteDrink = async(name: string) => {
     return false;
 }
 
-export const findAndModifyDrink = async (name:string,preparation: string, description: string, alcoholContent: number) => {
+export const findAndModifyDrink = async (name:string, preparation: string, description: string, alcoholContent: number) => {
     const drinkIndex = database.findIndex((drink) => drink.name === name);
 
     if(drinkIndex !== -1) {
