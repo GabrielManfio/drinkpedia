@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { drinkRepository } from "../repository/drink-repository";
+import * as drinkRepository from "../repository/drink-repository";
 
 export function getDrinks(req: Request, res: Response) {
     const drinks = drinkRepository.findAll();
