@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createDrinkService, deleteDrinkService, getDrinkService } from "../services/drink-services";
+import { createDrinkService, deleteDrinkService, getDrinkService, updateDrinkService } from "../services/drink-services";
 import HttpResponse from "../model/http-response";
 import { noContent } from "../utils/http-helper";
 import DeleteDrinkParams from "../model/delete-drink";
@@ -32,3 +32,20 @@ export const deleteDrink = async (
 
     res.status(httpResponse.statusCode).json(httpResponse.body);
 };
+
+export const updateDrink = async (
+    req: Request<DeleteDrinkParams>,
+    res: Response
+) => {
+    const { name } = req.params;
+    const { preparation, description, alcoholContent } = req.body;
+
+    const httpResponse = await updateDrinkService(
+        name,
+        preparation,
+        description,
+        alcoholContent
+    );
+
+    res.status(httpResponse.statusCode).json(httpResponse.body);
+}
