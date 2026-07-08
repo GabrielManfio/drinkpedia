@@ -13,11 +13,7 @@ export function getDrink(req: Request, res: Response) {
 
     const drink = drinkRepository.findByName(Array.isArray(name) ? name[0] : name);
 
-    if (!drink) {
-        return res.status(404).json({
-            message: "Drink não encontrado"
-        });
-    }
+
 
     res.json(drink);
 }
