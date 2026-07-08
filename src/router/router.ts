@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { deleteDrink, getDrink, postDrink, updateDrink } from "../controller/drink-controller";
-import { updateDrinkService } from "../services/drink-services";
 
 const router = Router();
 
@@ -9,6 +8,6 @@ router.post("/drinks", postDrink)
 
 router.delete("/drink/:name", deleteDrink)
 
-router.patch("/drinks:/name", updateDrink)
+router.patch("/drinks/:name", updateDrink)
 
 export default router;
