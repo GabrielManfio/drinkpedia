@@ -29,27 +29,33 @@ export const createDrinkService = async (drinks: DrinkModel) =>{
     return response
 }
 
-export const deleteDrinkService = async (name: string) =>{
-    let response = null;
-    const isDelete = await drinkRepository.deleteDrink(name)
+export const deleteDrinkService = async (name: string) => {
+    const isDelete = await drinkRepository.deleteDrink(name);
 
-    if(isDelete){
-        response = await httpHelper.ok(null)
-    }else {
-        response = httpHelper.badRequest();
+    if (isDelete) {
+        return httpHelper.ok("Drink deleted");
+    } else {
+        return httpHelper.notFound();
     }
-    return response
 }
 
 export const updateDrinkService = async (name: string, preparation: string, description: string, alcoholContent: number) => {
     const data = await drinkRepository.findByName(name);
-    let response = null;
+
+    if (!data) {
+        return httpHelper.notFound();
+    }
 
     if (!preparation && !description && !alcoholContent) {
-        response = httpHelper.badRequest();
-        return response
-    } else {
-        response = httpHelper.ok(null);
+        return httpHelper.badRequest();
     }
-    return response;
-}
+
+    const updated = await drinkRepository.findAndModifyDrink(
+        name,
+        preparation,
+        description,
+        alcoholContent
+    );
+
+    return httpHelper.ok(updated);
+};

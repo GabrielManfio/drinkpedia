@@ -20,3 +20,8 @@ export const created = async <T>(data: T): Promise<HttpResponse> => ({
   statusCode: 201,
   body: data
 });
+
+export const notFound = async (): Promise<HttpResponse> => ({
+    statusCode: 404,
+    body: null
+});
