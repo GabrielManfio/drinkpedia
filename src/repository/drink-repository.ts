@@ -5,7 +5,6 @@ import DrinkModel from "../model/drink-model";
 const database = drinks
 
 export const findByName = async (name: string): Promise<DrinkModel | undefined> => {
-    console.log("teste")
   return database.find((drink) => drink.name === name);
   
 };
