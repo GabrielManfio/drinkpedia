@@ -3,10 +3,10 @@ import { deleteDrink, getDrink, postDrink, updateDrink } from "../controller/dri
 
 const router = Router();
 
-router.get("/api/drinks", getDrink)
-router.post("/api/drinks", postDrink)
+router.get("/drinks", getDrink)
+router.post("/drinks", postDrink)
 
-router.delete("/drink/:name", deleteDrink)
+router.delete("/drinks/:name", deleteDrink)
 
 router.patch("/drinks/:name", updateDrink)
 

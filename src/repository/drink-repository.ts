@@ -36,7 +36,7 @@ export const findAndModifyDrink = async (name:string, preparation: string, descr
 }
 
 
-export function findAllDrinks() {
-    throw new Error("Function not implemented.");
-}
+export const findAllDrinks = async (): Promise<DrinkModel[]> => {
+  return database;
+};
 
