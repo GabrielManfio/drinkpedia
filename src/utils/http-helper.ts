@@ -16,7 +16,7 @@ export const badRequest = async (): Promise<HttpResponse> => ({
     body: null
 });
 
-export const created = async (drinks: DrinkModel): Promise<HttpResponse> => ({
-    statusCode: 201,
-    body: "Sucessful"
-})
+export const created = async <T>(data: T): Promise<HttpResponse> => ({
+  statusCode: 201,
+  body: data
+});
