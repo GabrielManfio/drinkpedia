@@ -5,7 +5,9 @@ import DrinkModel from "../model/drink-model";
 const database = drinks
 
 export const findByName = async (name: string): Promise<DrinkModel | undefined> => {
+    console.log("teste")
   return database.find((drink) => drink.name === name);
+  
 };
 export const insertDrink = async(drink: DrinkModel): Promise<DrinkModel[]> => {
     database.push(drink);
@@ -33,4 +35,8 @@ export const findAndModifyDrink = async (name:string, preparation: string, descr
     return database[drinkIndex];
 }
 
+
+export function findAllDrinks() {
+    throw new Error("Function not implemented.");
+}
 

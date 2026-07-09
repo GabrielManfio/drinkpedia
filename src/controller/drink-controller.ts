@@ -1,23 +1,24 @@
 import { Request, Response } from "express";
-import { createDrinkService, deleteDrinkService, getDrinkService, updateDrinkService } from "../services/drink-services";
+import { createDrinkService, deleteDrinkService, getAllDrinksService, updateDrinkService } from "../services/drink-services";
 import HttpResponse from "../model/http-response";
 import { noContent } from "../utils/http-helper";
 import DeleteDrinkParams from "../model/delete-drink";
+import { drinks } from "../model/drink-data";
 
 export const getDrink = async (req: Request, res: Response) =>{
-    const httpResponse = await getDrinkService(req.query) as HttpResponse
+    const httpResponse = await getAllDrinksService(req.query)
     
     res.status(httpResponse.statusCode).json(httpResponse.body)
 };
 
 export const postDrink = async (req: Request, res: Response) =>{
  const bodyValue = req.body;
- const httpResponse = await createDrinkService(bodyValue) as HttpResponse
+ const httpResponse = await createDrinkService(bodyValue) 
  
  if (httpResponse){
     res.status(httpResponse.statusCode).json(httpResponse.body)
  } else {
-    const response = await noContent() as HttpResponse
+    const response = await noContent()
  }
 }
 

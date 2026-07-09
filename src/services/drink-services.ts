@@ -1,19 +1,20 @@
 
+import { ParsedQs } from "qs";
 import DrinkModel from "../model/drink-model";
+import HttpResponse from "../model/http-response";
 import * as drinkRepository from "../repository/drink-repository"
 import * as httpHelper from "../utils/http-helper"
 
 
-export const getDrinkService = async (drinkData: any) => {
-    const data = await drinkRepository.findByName(drinkData.name,);
-    let response = null
+export const getAllDrinksService = async (query: ParsedQs): Promise<HttpResponse> => {
+  const data = await drinkRepository.findAllDrinks();
+  return httpHelper.ok(data);
+};
 
-    if (data) {
-        response = httpHelper.ok(data as any);
-    } else {
-        response = httpHelper.noContent();
-    }
-    return response
+export const getDrinkByNameService = async (name: string): Promise<HttpResponse> => {
+  const data = await drinkRepository.findByName(name);
+  if (data) return httpHelper.ok(data);
+  return httpHelper.noContent();
 };
 
 export const createDrinkService = async (drinks: DrinkModel) =>{
